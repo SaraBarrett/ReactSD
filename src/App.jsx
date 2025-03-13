@@ -8,16 +8,19 @@ import MainGoal from './components/MainGoal'
 import {userData} from './data/data.js';
 import CourseGoal from './components/CourseGoal.jsx'
 import OurBtn from './components/OurBtn.jsx'
-
-let content = 'Ainda não seleccionaste nada';
-
-function sayHello(myContent){
-  content = myContent;
-}
-
+import { useState } from 'react'
+import Discount from './components/Discount.jsx'
+import {EXAMPLES} from './data/coreConcepts.js'
 
 function App() {
   // const [count, setCount] = useState(0)
+
+  const [content, setContent] = useState('components');
+
+  function sayHello(myContent){
+    setContent(myContent);
+    console.log(myContent)
+  }
 
   return (
     <>
@@ -41,11 +44,19 @@ function App() {
       </p>
       <CourseGoal/>
       <CourseGoal title='react'/>
+
       <menu>
-      <OurBtn onSelect={() =>sayHello('js')}>JS</OurBtn>
-      <OurBtn onSelect={() =>sayHello('react')}>React</OurBtn>
-      <div>{content}</div>
+      <OurBtn functionForClick={() =>sayHello('jsx')}>jsx</OurBtn>
+      <OurBtn functionForClick={() =>sayHello('props')}>props</OurBtn>
+      <OurBtn functionForClick={() =>sayHello('state')}>state</OurBtn>
+      <div>
+        <p>{EXAMPLES[content].title}</p>
+      <p>{EXAMPLES[content].description}</p>
+      </div>
       </menu>
+
+
+      <Discount/>
     </>
   )
 }
