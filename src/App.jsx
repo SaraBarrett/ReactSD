@@ -5,21 +5,43 @@ import './App.css'
 import Header from './components/Header'
 import Card from './components/Card'
 import MainGoal from './components/MainGoal'
-import {userData} from './data/data.js';
 import CourseGoal from './components/CourseGoal.jsx'
 import OurBtn from './components/OurBtn.jsx'
 import { useState } from 'react'
 import Discount from './components/Discount.jsx'
-import {EXAMPLES} from './data/coreConcepts.js'
+import {EXAMPLES, CORE_CONCEPTS} from './data/coreConcepts.js'
+import Delete from './components/Delete.jsx'
+import ComponentsCard from './components/ComponentsCard.jsx'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import HomePage from './pages/HomePage.jsx'
+import ShoppingList from './pages/ShoppingList.jsx'
+import Contacts from './pages/Contacts.jsx'
+import LayoutMaster from './components/layoutMaster.jsx'
+import ErrorPage from './pages/ErrorPage.jsx'
+
+const router = createBrowserRouter([
+  {path: '/', 
+    element: <LayoutMaster/>,
+    errorElement: <ErrorPage/>,
+    children:[
+      {path: '/', element: <HomePage/>},
+      {path: '/shopping-list', element: <ShoppingList/>},
+      {path: '/contacts/:name', element: <Contacts/>}
+    ]
+  },
+ 
+]);
+
 
 function App() {
+
+  return <RouterProvider router={router}/>;
   // const [count, setCount] = useState(0)
 
   const [content, setContent] = useState('components');
 
   function sayHello(myContent){
     setContent(myContent);
-    console.log(myContent)
   }
 
   return (
@@ -36,27 +58,30 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <Card name={userData.name}/>
-      <Card name='Márcia' title='coordenadora'/>
-      <Card name='Bruno' title='coordenador pedagógico'/>
+      
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
       <CourseGoal/>
       <CourseGoal title='react'/>
-
       <menu>
-      <OurBtn functionForClick={() =>sayHello('jsx')}>jsx</OurBtn>
-      <OurBtn functionForClick={() =>sayHello('props')}>props</OurBtn>
-      <OurBtn functionForClick={() =>sayHello('state')}>state</OurBtn>
+      <OurBtn active={content == 'jsx'}  functionForClick={() =>sayHello('jsx')}>jsx</OurBtn>
+      <OurBtn active={content == 'props'} functionForClick={() =>sayHello('props')}>props</OurBtn>
+      <OurBtn active={content == 'state'} functionForClick={() =>sayHello('state')}>state</OurBtn>
       <div>
         <p>{EXAMPLES[content].title}</p>
       <p>{EXAMPLES[content].description}</p>
       </div>
       </menu>
-
-
       <Discount/>
+      <Delete/>
+      <div>
+      {CORE_CONCEPTS.map((item) =>
+       <ComponentsCard key={item.title} {...item}/>
+      )}
+      
+     
+      </div>
     </>
   )
 }

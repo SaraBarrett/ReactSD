@@ -1,3 +1,7 @@
 .btnColor{
     background-color: darkmagenta;
 }
+
+.activeBtn{
+    background-color: green;
+}
