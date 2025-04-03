@@ -19,6 +19,7 @@ import Contacts from './pages/Contacts.jsx'
 import LayoutMaster from './components/layoutMaster.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
 import AvailablePlaces from './pages/PlacesIndex.jsx'
+import StarWars from './pages/StarWars.jsx'
 
 const router = createBrowserRouter([
   {path: '/', 
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       {path: '/shopping-list', element: <ShoppingList/>},
       {path: '/contacts/:name', element: <Contacts/>},
       {path: '/places', element: <AvailablePlaces/>},
+      {path: '/SWars', element: <StarWars/>},
     ]
   },
  

@@ -32,7 +32,7 @@ const handleRemovePlace = useCallback(
 
     setModalIsOpen(false);
   },
-  [userPlaces]
+  [UserPlaces]
 );
 
 function handleStartRemovePlace(place) {

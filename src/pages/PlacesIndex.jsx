@@ -1,9 +1,13 @@
 import globeImg from '../assets/globe.png'
 import Places from '../components/places/Places'
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef, useCallback } from 'react';
+import { updatePlaces } from '../https';
 
 export default function AvailablePlaces() {
   const [AvailablePlaces, setPlaces] = useState(null);
+  const [UserPlaces, setUserPlaces] = useState([]);
+  const selectedPlace = useRef(null);
+
   
   useEffect(() => {
     fetch("http://localhost:3000/places")
@@ -12,8 +16,40 @@ export default function AvailablePlaces() {
         setPlaces(resData.places);
       });
   }, []);
-  
-  
+
+   function handleSelectPlace(selectedPlace) {
+     setUserPlaces((prevPickedPlaces) => {
+       if (!prevPickedPlaces) {
+         prevPickedPlaces = [];
+       }
+       if (prevPickedPlaces.some((place) => place.id === selectedPlace.id)) {
+         return prevPickedPlaces;
+       }
+       return [selectedPlace, ...prevPickedPlaces];
+     });
+
+    updatePlaces([selectedPlace, ...UserPlaces]);
+
+    
+   }
+   const handleRemovePlace = useCallback(
+     async function handleRemovePlace() {
+       setUserPlaces((prevPickedPlaces) =>
+         prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id)
+       );
+
+       updatePlaces(
+        UserPlaces.filter((place) => place.id != selectedPlace.current.id)
+       );
+     },
+     [UserPlaces]
+   );
+
+   function handleStartRemovePlace(place) {
+    selectedPlace.current = place;
+    handleRemovePlace();
+
+  }
 
   return (
     <>
@@ -26,10 +62,18 @@ export default function AvailablePlaces() {
       </p>
     </div>
     <main>
+    <Places
+        title="My Selected Places"
+        fallbackText="Select Your Places"
+        places={UserPlaces}
+        onSelectPlace={handleStartRemovePlace}
+      />
       <Places
+
         title="Available Places"
         fallbackText="No Places Available"
         places={AvailablePlaces}
+        onSelectPlace={handleSelectPlace}
       />
     </main>
   </>
