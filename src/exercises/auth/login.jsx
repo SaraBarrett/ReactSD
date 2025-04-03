@@ -15,10 +15,8 @@ export default function Login() {
         <div className="control no-margin">
           <label htmlFor="password">Password</label>
           <input  
-            id="password" type="password" name="password" 
-           
-        />
-        
+            id="password" type="password" name="password"/>
+        </div>
         <div className="control no-margin">
           <label htmlFor="confirmPassword">Password</label>
           <input  
