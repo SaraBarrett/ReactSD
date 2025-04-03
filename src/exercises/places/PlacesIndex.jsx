@@ -11,8 +11,8 @@ export default function AvailablePlaces() {
     </div>
     <main>
       <Places
-        title="I'd like to visit ..."
-        fallbackText="Select the places you would like to visit below."
+        title="Available Places"
+        fallbackText="No Places Available"
       />
     </main>
   </>

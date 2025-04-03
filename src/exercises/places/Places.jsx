@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import './Places.css'
 
 export default function Places({ title, places = null, fallbackText, onSelectPlace }) {
