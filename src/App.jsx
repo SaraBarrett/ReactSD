@@ -18,6 +18,7 @@ import ShoppingList from './pages/ShoppingList.jsx'
 import Contacts from './pages/Contacts.jsx'
 import LayoutMaster from './components/layoutMaster.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
+import AvailablePlaces from './pages/PlacesIndex.jsx'
 
 const router = createBrowserRouter([
   {path: '/', 
@@ -26,7 +27,8 @@ const router = createBrowserRouter([
     children:[
       {path: '/', element: <HomePage/>},
       {path: '/shopping-list', element: <ShoppingList/>},
-      {path: '/contacts/:name', element: <Contacts/>}
+      {path: '/contacts/:name', element: <Contacts/>},
+      {path: '/places', element: <AvailablePlaces/>},
     ]
   },
  
