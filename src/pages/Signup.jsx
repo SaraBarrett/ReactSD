@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './auth.css'
 
 export default function Signup() {
     const [passwordNotEqual, setPasswordsAreNotEqual] = useState(false);
+    const navigate = useNavigate();
 
-    function handleSubmit(event){
+     function handleSubmit(event){
         event.preventDefault();
         const formData = new FormData(event.target);
         const data = Object.fromEntries(formData.entries());
@@ -30,6 +32,8 @@ export default function Signup() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user),
         });
+
+        navigate("/", {state: {message: "User inserido com sucesso!"}});
       
     }
 

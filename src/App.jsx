@@ -21,6 +21,8 @@ import ErrorPage from './pages/ErrorPage.jsx'
 import AvailablePlaces from './pages/PlacesIndex.jsx'
 import StarWars from './pages/StarWars.jsx'
 import Signup from './pages/Signup.jsx'
+import Login from './pages/Login.jsx'
+import { AuthProvider } from './contexts/AuthContext.jsx'
 
 const router = createBrowserRouter([
   {path: '/', 
@@ -33,6 +35,7 @@ const router = createBrowserRouter([
       {path: '/places', element: <AvailablePlaces/>},
       {path: '/SWars', element: <StarWars/>},
       {path: '/register', element: <Signup/>},
+      {path: '/login', element: <Login/>},
     ]
   },
  
@@ -41,10 +44,13 @@ const router = createBrowserRouter([
 
 function App() {
 
-  return <RouterProvider router={router}/>;
+  return( 
+  <AuthProvider>
+    <RouterProvider router={router}/>
+  </AuthProvider>);
   // const [count, setCount] = useState(0)
 
-  const [content, setContent] = useState('components');
+
 
   function sayHello(myContent){
     setContent(myContent);
