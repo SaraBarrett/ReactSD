@@ -9,6 +9,7 @@ export default function HomePage(){
             <li><Link to="/contacts/Sara">Contactos</Link></li>
             <li> <Link to="/places">Places</Link></li>
             <li><Link to="SWars">StarWars</Link></li>
+            <li><Link to="/register">Register</Link></li>
         </ul>
     </div>);
 
